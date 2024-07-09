@@ -1,0 +1,47 @@
+.app {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #e0e0e0;
+  height: 100vh;
+}
+
+.search-container {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-inner {
+  display: flex;
+}
+
+.dropdown {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid gray;
+  width: 280px;
+  border-radius: 13px;
+  background: #e0e0e0;
+  box-shadow: 5px 5px 3px #afafaf, -5px -5px 3px #ffffff;
+  margin-top: 10px;
+}
+
+.dropdown:empty {
+  border: none;
+}
+
+.dropdown-row {
+  cursor: pointer;
+  text-align: start;
+  margin: 2px 0;
+  padding: 5px 15px;
+}
+input {
+  width: 200px;
+}
+.search-inner {
+  display: flex;
+}
