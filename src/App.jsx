@@ -5,7 +5,8 @@ function App() {
   const [value, setValue] = useState("");
   const [data, setData] = useState([]);
 
-  // console.log(value);
+  // const [searchItems, setSearchItems] = useState("");
+  const [list, setList] = useState([]);
 
   const onChange = (event) => {
     setValue(event.target.value);
@@ -13,8 +14,19 @@ function App() {
 
   const onSearch = (searchTerm) => {
     setValue(searchTerm);
-    // our api to fetch the search results
-    // console.log("search", searchTerm);
+  };
+
+  const handleSearchItem = (event) => {
+    event.preventDefault();
+
+    const newitem = {
+      id: Math.random(),
+      value,
+    };
+    if (value) {
+      setList([...list, newitem]);
+      setValue("");
+    }
   };
 
   useEffect(() => {
@@ -28,11 +40,12 @@ function App() {
       <h1 className="text-4xl font-semiboldmt-5">Search Your Medicine</h1>
       <div className="search-container mt-5">
         <div className="search-inner">
-          <form>
+          <form onSubmit={handleSearchItem}>
             <div className="flex">
               <input
                 type="text"
                 value={value}
+                name="SearchItem"
                 onChange={onChange}
                 className="border border-black text-xl"
               />
@@ -69,7 +82,15 @@ function App() {
           ))}
       </div>
 
-      <div className="text-4xl">{value}</div>
+      <div className="text-xl">
+        {list.map((item) => {
+          return (
+            <div key={item.id}>
+              <li className="text-start">{item.value}</li>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
