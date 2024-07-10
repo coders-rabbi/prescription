@@ -4,6 +4,7 @@ import "./App.css";
 function App() {
   const [value, setValue] = useState("");
   const [data, setData] = useState([]);
+  const [prescriptionError, setPrescriptionError] = useState("");
 
   // const [searchItems, setSearchItems] = useState("");
   const [list, setList] = useState([]);
@@ -34,6 +35,19 @@ function App() {
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
+
+  useEffect(() => {
+    const hasOmeprazole = list.some((item) => item.value === "Omeprazole");
+    const hasRanitidine = list.some((item) => item.value === "Ranitidine");
+
+    if (hasOmeprazole && hasRanitidine) {
+      setPrescriptionError("খাওয়া যাবে না");
+    } else if (list.length > 0) {
+      setPrescriptionError("খাওয়া যাবে");
+    } else {
+      setPrescriptionError("");
+    }
+  }, [list]);
 
   return (
     <div className="app">
@@ -90,6 +104,7 @@ function App() {
             </div>
           );
         })}
+        <p className="text-red-500 text-sm">{prescriptionError}</p>
       </div>
     </div>
   );
